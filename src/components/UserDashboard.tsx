@@ -1,167 +1,107 @@
 
 import React, { useContext, useState } from "react";
 import { AppContext } from "../context/AppContext";
-import { Pencil, Mail, MapPin, Phone, FileText, Check, CheckCircle2 } from "lucide-react";
+import { Pencil, Mail, MapPin, Phone, FileText, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
-import EditProfileModal from "@/components/EditProfileModal";
-import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
+import EditProfileModal from "@/components/EditProfileModal";
 
 const UserDashboard = () => {
   const { user } = useContext(AppContext);
   const [showEditProfile, setShowEditProfile] = useState(false);
 
-  const profileCompletion = {
-    mobile: { verified: false, percentage: 10 },
-    location: { completed: false, percentage: 2 },
-    resume: { uploaded: false, percentage: 10 }
-  };
-
-  const totalCompletion = 5; // Calculated based on completed fields
-
   return (
-    <div className="min-h-screen flex flex-col py-12 container px-4 2xl:px-20 mx-auto">
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="relative backdrop-blur-lg bg-white/10 border border-gray-200/20 rounded-2xl p-8 shadow-lg"
-      >
-        <div className="flex flex-col space-y-8">
-          {/* Header Section */}
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between">
-            <div className="flex items-center space-x-6">
-              <Avatar className="w-24 h-24 rounded-2xl border-2 border-white/20">
-                <AvatarImage src={user?.image} alt={user?.name} />
-              </Avatar>
-              <div className="space-y-1">
-                <div className="flex items-center space-x-2">
-                  <h1 className="text-2xl font-medium text-gray-900">Add name</h1>
-                  <Button 
-                    variant="ghost" 
-                    size="icon"
-                    className="h-8 w-8 rounded-full hover:bg-gray-100"
-                    onClick={() => setShowEditProfile(true)}
-                  >
-                    <Pencil className="h-4 w-4 text-gray-500" />
-                  </Button>
-                </div>
-                <p className="text-sm text-gray-500">Profile last updated - 24Mar, 2024</p>
-                <Badge variant="secondary" className="mt-2">Fresher</Badge>
-              </div>
+    <div className="min-h-screen flex flex-col py-12 px-4 mx-auto max-w-3xl">
+      <div className="bg-white rounded-xl p-6 shadow-sm">
+        <div className="flex flex-col md:flex-row gap-6">
+          {/* Left Section - Profile Photo */}
+          <div className="relative">
+            <div className="w-28 h-28 rounded-full bg-gray-200 flex items-center justify-center relative">
+              <Plus className="h-6 w-6 text-gray-400" />
+              <span className="absolute -bottom-1 text-xs font-medium text-gray-600">Add photo</span>
+            </div>
+            {/* Progress Circle */}
+            <div className="absolute bottom-0 right-0">
+              <svg className="w-8 h-8">
+                <circle
+                  cx="16"
+                  cy="16"
+                  r="14"
+                  fill="none"
+                  stroke="#f1f1f1"
+                  strokeWidth="3"
+                />
+                <circle
+                  cx="16"
+                  cy="16"
+                  r="14"
+                  fill="none"
+                  stroke="#FF0000"
+                  strokeWidth="3"
+                  strokeDasharray="87.96"
+                  strokeDashoffset="83.56"
+                  transform="rotate(-90 16 16)"
+                />
+                <text x="12" y="20" className="text-xs font-medium">5%</text>
+              </svg>
             </div>
           </div>
 
-          {/* Profile Details Section */}
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="space-y-6">
-              {/* Location */}
-              <motion.div 
-                whileHover={{ scale: 1.01 }}
-                className="flex items-center space-x-4 p-4 rounded-lg border border-gray-200 bg-white/50"
-              >
-                <MapPin className="h-5 w-5 text-gray-400" />
-                <div className="flex-1">
-                  <p className="text-sm font-medium text-gray-900">Add location</p>
-                  <Progress 
-                    value={profileCompletion.location.percentage} 
-                    className="h-1 mt-2"
-                  />
-                </div>
-              </motion.div>
-
-              {/* Mobile */}
-              <motion.div 
-                whileHover={{ scale: 1.01 }}
-                className="flex items-center space-x-4 p-4 rounded-lg border border-gray-200 bg-white/50"
-              >
-                <Phone className="h-5 w-5 text-gray-400" />
-                <div className="flex-1">
-                  <p className="text-sm font-medium text-gray-900">Add mobile number</p>
-                  <Progress 
-                    value={profileCompletion.mobile.percentage} 
-                    className="h-1 mt-2"
-                  />
-                </div>
-              </motion.div>
-
-              {/* Availability */}
-              <motion.div 
-                whileHover={{ scale: 1.01 }}
-                className="flex items-center space-x-4 p-4 rounded-lg border border-gray-200 bg-white/50"
-              >
-                <FileText className="h-5 w-5 text-gray-400" />
-                <div className="flex-1">
-                  <p className="text-sm font-medium text-gray-900">Add availability to join</p>
-                  <Progress 
-                    value={profileCompletion.resume.percentage} 
-                    className="h-1 mt-2"
-                  />
-                </div>
-              </motion.div>
-            </div>
-
-            {/* Right Section - Completion Status */}
-            <div className="bg-orange-50/50 rounded-xl p-6 space-y-6">
-              <div className="space-y-4">
-                <h3 className="text-lg font-medium text-gray-900">Profile Completion</h3>
-                
-                {/* Overall Progress */}
-                <Progress value={totalCompletion} className="h-2 mb-4" />
-                
-                {/* Mobile Verification */}
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <Phone className="h-4 w-4 text-gray-500" />
-                    <span className="text-sm text-gray-600">Verify mobile number</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <span className="text-sm text-green-500">↑ 10%</span>
-                  </div>
-                </div>
-
-                {/* Location */}
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <MapPin className="h-4 w-4 text-gray-500" />
-                    <span className="text-sm text-gray-600">Add preferred location</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <span className="text-sm text-green-500">↑ 2%</span>
-                  </div>
-                </div>
-
-                {/* Resume */}
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <FileText className="h-4 w-4 text-gray-500" />
-                    <span className="text-sm text-gray-600">Add resume</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <span className="text-sm text-green-500">↑ 10%</span>
-                  </div>
-                </div>
-
+          {/* Right Section - Profile Details */}
+          <div className="flex-1 space-y-4">
+            {/* Name Section */}
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <h1 className="text-lg font-medium text-gray-900">{user.name}</h1>
                 <Button 
-                  className="w-full mt-4 bg-red-500 hover:bg-red-600 text-white"
+                  variant="ghost" 
+                  size="icon"
+                  className="h-6 w-6 text-blue-500"
                   onClick={() => setShowEditProfile(true)}
                 >
-                  Add 14 missing details
+                  <Pencil className="h-4 w-4" />
                 </Button>
+              </div>
+              <p className="text-sm text-gray-500">Profile last updated - 24Mar, 2024</p>
+            </div>
+
+            {/* Profile Details Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Location */}
+              <div className="flex items-center gap-2 text-blue-500">
+                <MapPin className="h-4 w-4" />
+                <span className="text-sm">Add location</span>
+              </div>
+
+              {/* Mobile */}
+              <div className="flex items-center gap-2 text-blue-500">
+                <Phone className="h-4 w-4" />
+                <span className="text-sm">Add mobile number</span>
+              </div>
+
+              {/* Fresher Badge */}
+              <div className="flex items-center gap-2">
+                <Badge variant="secondary" className="text-xs bg-gray-100 text-gray-600">
+                  Fresher
+                </Badge>
+              </div>
+
+              {/* Email */}
+              <div className="flex items-center gap-2">
+                <Mail className="h-4 w-4 text-gray-400" />
+                <span className="text-sm text-gray-600">{user.email}</span>
+              </div>
+
+              {/* Availability */}
+              <div className="flex items-center gap-2 text-blue-500">
+                <FileText className="h-4 w-4" />
+                <span className="text-sm">Add availability to join</span>
               </div>
             </div>
           </div>
         </div>
-
-        {/* Email Verification Badge */}
-        <div className="absolute top-8 right-8 flex items-center space-x-2">
-          <Mail className="h-4 w-4 text-green-500" />
-          <span className="text-sm text-gray-600">monosijkayal@gmail.com</span>
-          <CheckCircle2 className="h-4 w-4 text-green-500" />
-        </div>
-      </motion.div>
+      </div>
 
       {showEditProfile && (
         <EditProfileModal onClose={() => setShowEditProfile(false)} />
