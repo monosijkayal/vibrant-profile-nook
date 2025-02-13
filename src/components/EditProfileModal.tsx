@@ -18,7 +18,11 @@ const EditProfileModal = ({ onClose }: EditProfileModalProps) => {
     location: user.location || "",
     mobile: user.mobile || "",
     availability: user.availability || "",
-    bio: user.bio || ""
+    bio: user.bio || "",
+    specialization: user.specialization || "",
+    artStyle: user.artStyle || "",
+    pricing: user.pricing || "",
+    experience: user.experience || ""
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -39,18 +43,18 @@ const EditProfileModal = ({ onClose }: EditProfileModalProps) => {
     <Dialog open onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Edit Profile</DialogTitle>
+          <DialogTitle>Edit Artist Profile</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid gap-4 py-4">
             <div className="grid gap-2">
-              <Label htmlFor="name">Name</Label>
+              <Label htmlFor="name">Artist Name</Label>
               <Input
                 id="name"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                placeholder="Enter your name"
+                placeholder="Enter your artist name"
               />
             </div>
             <div className="grid gap-2">
@@ -60,8 +64,48 @@ const EditProfileModal = ({ onClose }: EditProfileModalProps) => {
                 name="bio"
                 value={formData.bio}
                 onChange={handleChange}
-                placeholder="Tell us about yourself"
+                placeholder="Tell potential clients about yourself and your artistic journey"
                 className="h-24"
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="specialization">Specialization</Label>
+              <Input
+                id="specialization"
+                name="specialization"
+                value={formData.specialization}
+                onChange={handleChange}
+                placeholder="E.g., Portrait, Landscape, Digital Art"
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="artStyle">Art Style</Label>
+              <Input
+                id="artStyle"
+                name="artStyle"
+                value={formData.artStyle}
+                onChange={handleChange}
+                placeholder="E.g., Realistic, Abstract, Anime"
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="pricing">Starting Price</Label>
+              <Input
+                id="pricing"
+                name="pricing"
+                value={formData.pricing}
+                onChange={handleChange}
+                placeholder="E.g., Starting from $50"
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="experience">Years of Experience</Label>
+              <Input
+                id="experience"
+                name="experience"
+                value={formData.experience}
+                onChange={handleChange}
+                placeholder="E.g., 5 years"
               />
             </div>
             <div className="grid gap-2">
@@ -75,23 +119,23 @@ const EditProfileModal = ({ onClose }: EditProfileModalProps) => {
               />
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="mobile">Mobile Number</Label>
+              <Label htmlFor="mobile">Contact Number</Label>
               <Input
                 id="mobile"
                 name="mobile"
                 value={formData.mobile}
                 onChange={handleChange}
-                placeholder="Enter your mobile number"
+                placeholder="Enter your contact number"
               />
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="availability">Availability to Join</Label>
+              <Label htmlFor="availability">Availability</Label>
               <Input
                 id="availability"
                 name="availability"
                 value={formData.availability}
                 onChange={handleChange}
-                placeholder="Enter your availability"
+                placeholder="E.g., Available for commissions"
               />
             </div>
           </div>

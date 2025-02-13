@@ -1,9 +1,8 @@
 
 import React, { useContext, useState } from "react";
 import { AppContext } from "../context/AppContext";
-import { Pencil, Mail, MapPin, Phone, FileText, Plus } from "lucide-react";
+import { Pencil, Mail, MapPin, Phone, FileText, Plus, Palette, Brush, DollarSign, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import EditProfileModal from "@/components/EditProfileModal";
 
@@ -20,31 +19,6 @@ const UserDashboard = () => {
             <div className="w-28 h-28 rounded-full bg-gray-200 flex items-center justify-center relative">
               <Plus className="h-6 w-6 text-gray-400" />
               <span className="absolute -bottom-1 text-xs font-medium text-gray-600">Add photo</span>
-            </div>
-            {/* Progress Circle */}
-            <div className="absolute bottom-0 right-0">
-              <svg className="w-8 h-8">
-                <circle
-                  cx="16"
-                  cy="16"
-                  r="14"
-                  fill="none"
-                  stroke="#f1f1f1"
-                  strokeWidth="3"
-                />
-                <circle
-                  cx="16"
-                  cy="16"
-                  r="14"
-                  fill="none"
-                  stroke="#FF0000"
-                  strokeWidth="3"
-                  strokeDasharray="87.96"
-                  strokeDashoffset="83.56"
-                  transform="rotate(-90 16 16)"
-                />
-                <text x="12" y="20" className="text-xs font-medium">5%</text>
-              </svg>
             </div>
           </div>
 
@@ -63,7 +37,16 @@ const UserDashboard = () => {
                   <Pencil className="h-4 w-4" />
                 </Button>
               </div>
-              <p className="text-sm text-gray-500">Profile last updated - 24Mar, 2024</p>
+              <div className="flex gap-2">
+                <Badge variant="secondary" className="text-xs bg-purple-100 text-purple-600">
+                  Artist
+                </Badge>
+                {user.experience && (
+                  <Badge variant="secondary" className="text-xs bg-blue-100 text-blue-600">
+                    {user.experience} Experience
+                  </Badge>
+                )}
+              </div>
             </div>
 
             {/* Bio Section */}
@@ -71,8 +54,32 @@ const UserDashboard = () => {
               <p className="text-sm text-gray-600">{user.bio || "Add bio"}</p>
             </div>
 
-            {/* Profile Details Grid */}
+            {/* Artist Details Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Specialization */}
+              <div className="flex items-center gap-2 text-blue-500">
+                <Palette className="h-4 w-4" />
+                <span className="text-sm">{user.specialization || "Add specialization"}</span>
+              </div>
+
+              {/* Art Style */}
+              <div className="flex items-center gap-2 text-blue-500">
+                <Brush className="h-4 w-4" />
+                <span className="text-sm">{user.artStyle || "Add art style"}</span>
+              </div>
+
+              {/* Pricing */}
+              <div className="flex items-center gap-2 text-blue-500">
+                <DollarSign className="h-4 w-4" />
+                <span className="text-sm">{user.pricing || "Add pricing details"}</span>
+              </div>
+
+              {/* Availability */}
+              <div className="flex items-center gap-2 text-blue-500">
+                <Clock className="h-4 w-4" />
+                <span className="text-sm">{user.availability || "Add availability"}</span>
+              </div>
+
               {/* Location */}
               <div className="flex items-center gap-2 text-blue-500">
                 <MapPin className="h-4 w-4" />
@@ -82,26 +89,13 @@ const UserDashboard = () => {
               {/* Mobile */}
               <div className="flex items-center gap-2 text-blue-500">
                 <Phone className="h-4 w-4" />
-                <span className="text-sm">{user.mobile || "Add mobile number"}</span>
-              </div>
-
-              {/* Fresher Badge */}
-              <div className="flex items-center gap-2">
-                <Badge variant="secondary" className="text-xs bg-gray-100 text-gray-600">
-                  Fresher
-                </Badge>
+                <span className="text-sm">{user.mobile || "Add contact number"}</span>
               </div>
 
               {/* Email */}
               <div className="flex items-center gap-2">
                 <Mail className="h-4 w-4 text-gray-400" />
                 <span className="text-sm text-gray-600">{user.email}</span>
-              </div>
-
-              {/* Availability */}
-              <div className="flex items-center gap-2 text-blue-500">
-                <FileText className="h-4 w-4" />
-                <span className="text-sm">{user.availability || "Add availability to join"}</span>
               </div>
             </div>
           </div>
