@@ -71,13 +71,13 @@ const UserDashboard = () => {
               {/* Location */}
               <div className="flex items-center gap-2 text-blue-500">
                 <MapPin className="h-4 w-4" />
-                <span className="text-sm">Add location</span>
+                <span className="text-sm">{user.location || "Add location"}</span>
               </div>
 
               {/* Mobile */}
               <div className="flex items-center gap-2 text-blue-500">
                 <Phone className="h-4 w-4" />
-                <span className="text-sm">Add mobile number</span>
+                <span className="text-sm">{user.mobile || "Add mobile number"}</span>
               </div>
 
               {/* Fresher Badge */}
@@ -96,7 +96,7 @@ const UserDashboard = () => {
               {/* Availability */}
               <div className="flex items-center gap-2 text-blue-500">
                 <FileText className="h-4 w-4" />
-                <span className="text-sm">Add availability to join</span>
+                <span className="text-sm">{user.availability || "Add availability to join"}</span>
               </div>
             </div>
           </div>
