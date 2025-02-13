@@ -66,6 +66,11 @@ const UserDashboard = () => {
               <p className="text-sm text-gray-500">Profile last updated - 24Mar, 2024</p>
             </div>
 
+            {/* Bio Section */}
+            <div className="space-y-2">
+              <p className="text-sm text-gray-600">{user.bio || "Add bio"}</p>
+            </div>
+
             {/* Profile Details Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Location */}

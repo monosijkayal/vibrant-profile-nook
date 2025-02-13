@@ -8,6 +8,7 @@ interface User {
   location?: string;
   mobile?: string;
   availability?: string;
+  bio?: string;
 }
 
 interface AppContextType {
@@ -27,7 +28,8 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     image: undefined,
     location: "",
     mobile: "",
-    availability: ""
+    availability: "",
+    bio: ""
   });
 
   const updateUser = (data: Partial<User>) => {

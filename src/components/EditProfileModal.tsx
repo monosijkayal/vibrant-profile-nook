@@ -3,6 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { useState, useContext } from "react";
 import { AppContext } from "@/context/AppContext";
 
@@ -14,9 +15,10 @@ const EditProfileModal = ({ onClose }: EditProfileModalProps) => {
   const { user, updateUser } = useContext(AppContext);
   const [formData, setFormData] = useState({
     name: user.name || "",
-    location: "",
-    mobile: "",
-    availability: ""
+    location: user.location || "",
+    mobile: user.mobile || "",
+    availability: user.availability || "",
+    bio: user.bio || ""
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -25,7 +27,7 @@ const EditProfileModal = ({ onClose }: EditProfileModalProps) => {
     onClose();
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -49,6 +51,17 @@ const EditProfileModal = ({ onClose }: EditProfileModalProps) => {
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="Enter your name"
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="bio">Bio</Label>
+              <Textarea
+                id="bio"
+                name="bio"
+                value={formData.bio}
+                onChange={handleChange}
+                placeholder="Tell us about yourself"
+                className="h-24"
               />
             </div>
             <div className="grid gap-2">
